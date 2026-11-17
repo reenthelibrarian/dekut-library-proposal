@@ -1,1 +1,834 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>DeKUT Library – Dedan Kimathi University of Technology</title>
+  <link rel="icon" href="https://www.dkut.ac.ke/library/wp-content/uploads/2019/10/favicon.png" sizes="32x32" />
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --dekut-green: #156504;
+      --dekut-green-dark: #0e4603;
+      --dekut-green-tint: #f2f7f1;
+      --dekut-gold: #c99700;
+      --text-main: #222222;
+      --text-muted: #555555;
+      --border-color: #dcdcdc;
+      --bg-body: #ffffff;
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
+      font-family: 'Roboto', Arial, sans-serif;
+      color: var(--text-main);
+      background-color: var(--bg-body);
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* Full-Width Edge-to-Edge Wrapper */
+    .page-wrapper {
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
+      background: #ffffff;
+    }
+
+    /* Top Institutional Info Bar (Full Width) */
+    .top-utility-bar {
+      width: 100%;
+      background: var(--dekut-green-dark);
+      color: #ffffff;
+      font-size: 13px;
+      padding: 8px max(28px, calc((100% - 1320px) / 2));
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .top-utility-bar a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .top-utility-bar a:hover {
+      text-decoration: underline;
+    }
+
+    /* Site Header with Logo + Integrated Top Search (Full Width) */
+    .site-header {
+      width: 100%;
+      padding: 18px max(28px, calc((100% - 1320px) / 2));
+      background: #ffffff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 18px;
+    }
+
+    .site-logo img {
+      max-height: 84px;
+      width: auto;
+      display: block;
+    }
+
+    /* Header Search Box */
+    .header-search {
+      width: 100%;
+      max-width: 460px;
+    }
+
+    .search-scope-tabs {
+      display: flex;
+      gap: 4px;
+      margin-bottom: 5px;
+    }
+
+    .scope-btn {
+      background: #eeeeee;
+      border: 1px solid #d4d4d4;
+      border-bottom: none;
+      padding: 5px 12px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: #333333;
+      cursor: pointer;
+      border-radius: 3px 3px 0 0;
+    }
+
+    .scope-btn.active {
+      background: var(--dekut-green);
+      color: #ffffff;
+      border-color: var(--dekut-green);
+    }
+
+    .search-input-group {
+      display: flex;
+    }
+
+    .search-input-group input {
+      flex: 1;
+      padding: 10px 14px;
+      border: 1px solid #bbbbbb;
+      border-right: none;
+      font-size: 14px;
+      border-radius: 0 0 0 3px;
+    }
+
+    .search-input-group input:focus {
+      outline: none;
+      border-color: var(--dekut-green);
+    }
+
+    .search-input-group button {
+      background: var(--dekut-green);
+      color: #ffffff;
+      border: 1px solid var(--dekut-green);
+      padding: 10px 20px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+      border-radius: 0 3px 3px 0;
+    }
+
+    .search-input-group button:hover {
+      background: var(--dekut-green-dark);
+    }
+
+    /* Primary Navigation Bar (Full Width) */
+    .main-navigation {
+      width: 100%;
+      background-color: var(--dekut-green);
+      position: relative;
+      z-index: 100;
+    }
+
+    .mobile-menu-btn {
+      display: none;
+      width: 100%;
+      text-align: left;
+      background: var(--dekut-green);
+      color: #ffffff;
+      border: none;
+      padding: 13px 20px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .nav-menu {
+      list-style: none;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 0 max(14px, calc((100% - 1320px) / 2));
+    }
+
+    .nav-menu > li {
+      position: relative;
+    }
+
+    .nav-menu > li > a {
+      display: block;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 15px 17px;
+      font-size: 14.5px;
+      font-weight: 500;
+      transition: background 0.15s ease;
+    }
+
+    .nav-menu > li > a:hover,
+    .nav-menu > li > a.current {
+      background-color: var(--dekut-green-dark);
+    }
+
+    .nav-arrow {
+      font-size: 11px;
+      margin-left: 4px;
+    }
+
+    /* High-Contrast Dropdown Menus */
+    .sub-menu {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 255px;
+      background-color: #ffffff;
+      border: 1px solid #cccccc;
+      border-top: 3px solid var(--dekut-gold);
+      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.16);
+      list-style: none;
+      z-index: 200;
+    }
+
+    .nav-menu > li:hover > .sub-menu,
+    .nav-menu > li:focus-within > .sub-menu {
+      display: block;
+    }
+
+    .sub-menu li a {
+      display: block;
+      padding: 10px 16px;
+      color: #222222;
+      text-decoration: none;
+      font-size: 13.5px;
+      border-bottom: 1px solid #eeeeee;
+    }
+
+    .sub-menu li:last-child a {
+      border-bottom: none;
+    }
+
+    .sub-menu li a:hover {
+      background-color: var(--dekut-green-tint);
+      color: var(--dekut-green);
+      font-weight: 500;
+    }
+
+    .ext-note {
+      font-size: 11px;
+      color: #666666;
+      font-weight: 400;
+    }
+
+    /* Full-Width Banner Slider */
+    .slider-container {
+      position: relative;
+      width: 100%;
+      background: #1a1a1a;
+      overflow: hidden;
+    }
+
+    .banner-slide {
+      display: none;
+      position: relative;
+      width: 100%;
+    }
+
+    .banner-slide.active {
+      display: block;
+    }
+
+    .banner-slide a {
+      display: block;
+      text-decoration: none;
+    }
+
+    .banner-slide img {
+      width: 100%;
+      height: 430px;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* Full-Width Caption Strip at Bottom of Banner */
+    .banner-caption {
+      width: 100%;
+      background: rgba(14, 70, 3, 0.94);
+      color: #ffffff;
+      padding: 16px max(28px, calc((100% - 1320px) / 2));
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+
+    .banner-caption-text strong {
+      display: block;
+      font-size: 18px;
+      letter-spacing: 0.01em;
+    }
+
+    .banner-caption-text span {
+      font-size: 14px;
+      color: #e6f2e4;
+    }
+
+    .banner-cta {
+      background: #ffffff;
+      color: var(--dekut-green);
+      padding: 8px 18px;
+      font-size: 14px;
+      font-weight: 700;
+      border-radius: 3px;
+      white-space: nowrap;
+    }
+
+    .slider-btn {
+      position: absolute;
+      top: 42%;
+      transform: translateY(-50%);
+      background: rgba(0, 0, 0, 0.5);
+      color: #ffffff;
+      border: none;
+      width: 40px;
+      height: 52px;
+      font-size: 22px;
+      cursor: pointer;
+      z-index: 10;
+    }
+
+    .slider-btn:hover {
+      background: rgba(0, 0, 0, 0.8);
+    }
+
+    .slider-prev { left: 0; }
+    .slider-next { right: 0; }
+
+    /* Main Content + Sidebar (Full-Width Responsive Grid) */
+    .site-main {
+      width: 100%;
+      padding: 38px max(28px, calc((100% - 1320px) / 2)) 48px;
+      display: grid;
+      grid-template-columns: 2.2fr 1fr;
+      gap: 38px;
+    }
+
+    .entry-content h1 {
+      font-size: 24px;
+      color: var(--dekut-green);
+      margin-bottom: 14px;
+      padding-bottom: 8px;
+      border-bottom: 2px solid var(--dekut-green);
+    }
+
+    .entry-content p {
+      margin-bottom: 16px;
+      text-align: justify;
+      color: #2b2b2b;
+    }
+
+    /* Collection Figures Strip */
+    .collection-summary {
+      margin-top: 26px;
+      border: 1px solid var(--border-color);
+      background: var(--dekut-green-tint);
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      text-align: center;
+    }
+
+    .collection-item {
+      padding: 16px 10px;
+      border-right: 1px solid var(--border-color);
+    }
+
+    .collection-item:last-child {
+      border-right: none;
+    }
+
+    .collection-item strong {
+      display: block;
+      font-size: 22px;
+      color: var(--dekut-green);
+    }
+
+    .collection-item span {
+      font-size: 13.5px;
+      color: var(--text-muted);
+    }
+
+    /* Sidebar Widgets */
+    .sidebar-widget {
+      border: 1px solid var(--border-color);
+      margin-bottom: 24px;
+      background: #ffffff;
+    }
+
+    .widget-header {
+      background: var(--dekut-green);
+      color: #ffffff;
+      padding: 11px 16px;
+      font-size: 15.5px;
+      font-weight: 700;
+    }
+
+    .widget-links {
+      list-style: none;
+    }
+
+    .widget-links li {
+      border-bottom: 1px solid #eeeeee;
+    }
+
+    .widget-links li:last-child {
+      border-bottom: none;
+    }
+
+    .widget-links li a {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 11px 16px;
+      color: var(--dekut-green);
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .widget-links li a:hover {
+      background: var(--dekut-green-tint);
+      color: #000000;
+    }
+
+    .widget-body {
+      padding: 15px 16px;
+      font-size: 14px;
+    }
+
+    .widget-body p {
+      margin-bottom: 8px;
+    }
+
+    /* Institutional Footer (Full Width) */
+    .site-footer {
+      width: 100%;
+      background-color: var(--dekut-green);
+      color: #ffffff;
+      padding: 36px max(28px, calc((100% - 1320px) / 2)) 20px;
+    }
+
+    .footer-widgets {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      padding-bottom: 26px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .footer-col h3 {
+      font-size: 16px;
+      margin-bottom: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.25);
+      padding-bottom: 6px;
+    }
+
+    .footer-col p,
+    .footer-col li {
+      font-size: 14px;
+      margin-bottom: 7px;
+      list-style: none;
+    }
+
+    .footer-col a {
+      color: #ffffff;
+      text-decoration: none;
+    }
+
+    .footer-col a:hover {
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 18px;
+      font-size: 13px;
+      color: #e2e8f0;
+    }
+
+    @media (max-width: 820px) {
+      .site-main,
+      .footer-widgets {
+        grid-template-columns: 1fr;
+      }
+
+      .mobile-menu-btn {
+        display: block;
+      }
+
+      .nav-menu {
+        display: none;
+        flex-direction: column;
+        padding: 0;
+      }
+
+      .nav-menu.open {
+        display: flex;
+      }
+
+      .sub-menu {
+        position: static;
+        box-shadow: none;
+        border: none;
+        background: #0e4603;
+      }
+
+      .sub-menu li a {
+        color: #ffffff;
+        padding-left: 28px;
+        border-bottom-color: rgba(255, 255, 255, 0.12);
+      }
+
+      .banner-slide img {
+        height: 250px;
+      }
+
+      .collection-summary {
+        grid-template-columns: 1fr;
+      }
+
+      .collection-item {
+        border-right: none;
+        border-bottom: 1px solid var(--border-color);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+  <!-- Top Utility Bar -->
+  <div class="top-utility-bar">
+    <div>Main Campus Library &bull; Mon–Fri: 8:00am – 9:00pm | Sat: 9:00am – 4:00pm</div>
+    <div>
+      <a href="mailto:librarian@dkut.ac.ke">librarian@dkut.ac.ke</a> &nbsp;|&nbsp; Tel: +254-724-245-756 (Ext. 1072)
+    </div>
+  </div>
+
+  <!-- Header: Logo & Integrated Search -->
+  <header class="site-header">
+    <a href="https://www.dkut.ac.ke/library/" class="site-logo">
+      <img src="https://www.dkut.ac.ke/library/wp-content/uploads/2020/06/library-logo.fw_.png" alt="DeKUT Library Logo" />
+    </a>
+
+    <div class="header-search">
+      <div class="search-scope-tabs">
+        <button type="button" class="scope-btn active" onclick="setScope('ejournals', this)">E-Journals</button>
+        <button type="button" class="scope-btn" onclick="setScope('opac', this)">Library Catalogue</button>
+        <button type="button" class="scope-btn" onclick="setScope('repo', this)">Digital Repository</button>
+      </div>
+      <form class="search-input-group" onsubmit="runSearch(event)">
+        <input type="text" id="searchQuery" placeholder="Search electronic journals and articles..." required />
+        <button type="submit">Search</button>
+      </form>
+    </div>
+  </header>
+
+  <!-- Primary Navigation with Clear Dropdowns -->
+  <nav class="main-navigation" aria-label="Main Navigation">
+    <button type="button" class="mobile-menu-btn" onclick="document.getElementById('primaryMenu').classList.toggle('open')">
+      &#9776; Menu
+    </button>
+    <ul class="nav-menu" id="primaryMenu">
+      <li><a href="#" class="current">Home</a></li>
+      <li><a href="https://www.dkut.ac.ke/library/index.php/about/">About Us</a></li>
+      <li>
+        <a href="#">Services <span class="nav-arrow">&#9662;</span></a>
+        <ul class="sub-menu">
+          <li><a href="https://www.dkut.ac.ke/library/index.php/circulation-services/">Circulation Services</a></li>
+          <li><a href="https://www.dkut.ac.ke/library/index.php/print-collections/">Print Collections</a></li>
+          <li><a href="https://www.dkut.ac.ke/library/index.php/digital-services-collections/">Digital Services &amp; Collections</a></li>
+          <li><a href="https://www.dkut.ac.ke/library/index.php/reprographic-and-binding-services/">Reprographic and Binding Services</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Guides <span class="nav-arrow">&#9662;</span></a>
+        <ul class="sub-menu">
+          <li><a target="_blank" href="https://www.dkut.ac.ke/library/wp-content/uploads/2020/06/library-brochure.pdf">Library Guide (PDF)</a></li>
+          <li><a href="https://www.dkut.ac.ke/library/index.php/rules-and-regulations/">Rules and Regulations</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">Research Support <span class="nav-arrow">&#9662;</span></a>
+        <ul class="sub-menu">
+          <li><a href="https://www.dkut.ac.ke/library/index.php/research-tools/">Research Tools</a></li>
+          <li><a href="https://www.dkut.ac.ke/library/index.php/apa-reference/">APA Reference</a></li>
+          <li><a href="https://www.dkut.ac.ke/library/index.php/google-scholar/">Google Scholar</a></li>
+          <li><a href="https://www.dkut.ac.ke/library/index.php/user-guide/">User Guide</a></li>
+          <li><a href="https://www.dkut.ac.ke/library/index.php/information-literacy/">Information Literacy</a></li>
+        </ul>
+      </li>
+      <li>
+        <a href="#">E-Resources <span class="nav-arrow">&#9662;</span></a>
+        <ul class="sub-menu">
+          <li><a target="_blank" href="https://elibrarydkut.remotexs.co/user/login">MyLOFT <span class="ext-note">(Off-Campus Access)</span></a></li>
+          <li><a target="_blank" href="https://ebookcentral.proquest.com/auth/lib/kuct-ebooks/login.action?returnURL=https%3A%2F%2Febookcentral.proquest.com%2Flib%2Fkuct-ebooks%2Fhome.action%3FebraryDocId%3Dnull">ProQuest Ebook Central</a></li>
+          <li><a href="https://www.dkut.ac.ke/library/index.php/e-books/">E-Books</a></li>
+          <li><a href="https://www.dkut.ac.ke/library/index.php/e-journals/">E-Journals</a></li>
+          <li><a target="_blank" href="http://library.dkut.ac.ke/">Library Catalogue (OPAC)</a></li>
+          <li><a target="_blank" href="https://repository.dkut.ac.ke:8080/xmlui/">Digital Repository</a></li>
+          <li><a target="_blank" href="https://www.turnitin.com/">Plagiarism Check (Turnitin)</a></li>
+        </ul>
+      </li>
+      <li><a href="https://www.dkut.ac.ke/library/index.php/newsletters/">Newsletters</a></li>
+      <li><a href="https://www.dkut.ac.ke/library/index.php/staff-profile/">Staff</a></li>
+      <li><a target="_blank" href="https://www.dkut.ac.ke/">University Website</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero Banner Slider (Uses Real ProQuest & MyLOFT Banner Files) -->
+  <section class="slider-container" aria-label="Library Banners">
+    <button type="button" class="slider-btn slider-prev" onclick="moveSlide(-1)" aria-label="Previous Banner">&#10094;</button>
+    <button type="button" class="slider-btn slider-next" onclick="moveSlide(1)" aria-label="Next Banner">&#10095;</button>
+
+    <!-- Slide 1: ProQuest Ebook Central Banner (Replaces COVID-19 Poster) -->
+    <div class="banner-slide active">
+      <a target="_blank" rel="noopener"
+         href="https://ebookcentral.proquest.com/auth/lib/kuct-ebooks/login.action?returnURL=https%3A%2F%2Febookcentral.proquest.com%2Flib%2Fkuct-ebooks%2Fhome.action%3FebraryDocId%3Dnull">
+        <img src="proquest-banner.jpg"
+             onerror="this.onerror=null;this.src='https://www.dkut.ac.ke/library/wp-content/uploads/2019/10/JPG_7808.jpg';"
+             alt="ProQuest Ebook Central – Access Over 500,000 Academic E-Books" />
+        <div class="banner-caption">
+          <div class="banner-caption-text">
+            <strong>ProQuest Ebook Central</strong>
+            <span>Access over 500,000 multidisciplinary academic e-books and textbooks online.</span>
+          </div>
+          <span class="banner-cta">Open ProQuest &rarr;</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Slide 2: MyLOFT Off-Campus Access Banner -->
+    <div class="banner-slide">
+      <a target="_blank" rel="noopener" href="https://elibrarydkut.remotexs.co/user/login">
+        <img src="myloft-banner.jpg"
+             onerror="this.onerror=null;this.src='https://www.dkut.ac.ke/library/wp-content/uploads/2019/10/JPG_3369.jpg';"
+             alt="MyLOFT Off-Campus Access to DeKUT E-Resources" />
+        <div class="banner-caption">
+          <div class="banner-caption-text">
+            <strong>MyLOFT – Off-Campus E-Resources Access</strong>
+            <span>Log in remotely to access all subscribed e-journals, ProQuest e-books, and databases from anywhere.</span>
+          </div>
+          <span class="banner-cta">Login to MyLOFT &rarr;</span>
+        </div>
+      </a>
+    </div>
+
+    <!-- Slide 3: DeKUT Main Campus Library -->
+    <div class="banner-slide">
+      <a target="_blank" rel="noopener" href="http://library.dkut.ac.ke/">
+        <img src="https://www.dkut.ac.ke/library/wp-content/uploads/2019/10/JPG_3873.jpg"
+             alt="DeKUT Main Campus Library" />
+        <div class="banner-caption">
+          <div class="banner-caption-text">
+            <strong>DeKUT Main Campus Library</strong>
+            <span>Explore 60,000 print volumes and digital collections across our two library branches.</span>
+          </div>
+          <span class="banner-cta">Search Catalogue &rarr;</span>
+        </div>
+      </a>
+    </div>
+  </section>
+
+  <!-- Main Content Area (Two-Column WordPress Structure) -->
+  <main class="site-main">
+
+    <!-- Left Column: Welcome Message -->
+    <article class="entry-content">
+      <h1>Welcome to DeKUT University Library</h1>
+      <p>
+        Welcome to Dedan Kimathi University of Technology University Library. Dedan Kimathi University of Technology University Library is one of the few Universities in the country that is privileged to have adopted and enjoying a wide range of innovative services and systems that are used to necessitate easy access and maximum utilization of library information resources.
+      </p>
+      <p>
+        The library’s primary responsibility is to assist students and academic staff in the process of transforming information into knowledge; it does this by providing information that is essential for the purpose of teaching, learning, innovation and research. The Library has wide access to information materials that are geared to support teaching, learning, research, and innovation activities for students, academic staff, researchers and the community at large. Currently, the library provides access to approximately 60,000 volumes of print resources, 20,000 databases of electronic journals and over 500,000 electronic books.
+      </p>
+      <p>
+        Dedan Kimathi University Library operates from the <strong>Main Campus Library</strong>, which comprises two branches serving all DeKUT bonafide students, staff, and researchers. As an information center, we are pleased to serve you and assist you in all your academic endeavors.
+      </p>
+      <p>
+        The University Librarian<br />
+        <strong>Dr. Fredrick Otike</strong>
+      </p>
+
+      <div class="collection-summary">
+        <div class="collection-item">
+          <strong>60,000+</strong>
+          <span>Print Volumes</span>
+        </div>
+        <div class="collection-item">
+          <strong>20,000+</strong>
+          <span>E-Journal Databases</span>
+        </div>
+        <div class="collection-item">
+          <strong>500,000+</strong>
+          <span>Electronic Books</span>
+        </div>
+      </div>
+    </article>
+
+    <!-- Right Column: Clean Quick Access Sidebar -->
+    <aside aria-label="Quick Digital Portals">
+      <div class="sidebar-widget">
+        <div class="widget-header">Direct E-Resource Portals</div>
+        <ul class="widget-links">
+          <li>
+            <a target="_blank" rel="noopener" href="https://elibrarydkut.remotexs.co/user/login">
+              <span>MyLOFT (Off-Campus Access)</span>
+              <span>&rarr;</span>
+            </a>
+          </li>
+          <li>
+            <a target="_blank" rel="noopener" href="https://ebookcentral.proquest.com/auth/lib/kuct-ebooks/login.action?returnURL=https%3A%2F%2Febookcentral.proquest.com%2Flib%2Fkuct-ebooks%2Fhome.action%3FebraryDocId%3Dnull">
+              <span>ProQuest Ebook Central</span>
+              <span>&rarr;</span>
+            </a>
+          </li>
+          <li>
+            <a target="_blank" rel="noopener" href="http://library.dkut.ac.ke/">
+              <span>Library Catalogue (OPAC)</span>
+              <span>&rarr;</span>
+            </a>
+          </li>
+          <li>
+            <a target="_blank" rel="noopener" href="https://repository.dkut.ac.ke:8080/xmlui/">
+              <span>Digital Repository</span>
+              <span>&rarr;</span>
+            </a>
+          </li>
+          <li>
+            <a target="_blank" rel="noopener" href="https://www.turnitin.com/">
+              <span>Turnitin Plagiarism Check</span>
+              <span>&rarr;</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="sidebar-widget">
+        <div class="widget-header">Library Location</div>
+        <div class="widget-body">
+          <p><strong>Main Campus Library</strong> (Two Branches)</p>
+          <p>Dedan Kimathi University of Technology, Nyeri.</p>
+        </div>
+      </div>
+    </aside>
+
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="footer-widgets">
+      <div class="footer-col">
+        <h3>Research &amp; Student Guides</h3>
+        <ul>
+          <li><a href="https://www.dkut.ac.ke/library/index.php/apa-reference/">APA Reference Guide</a></li>
+          <li><a href="https://www.dkut.ac.ke/library/index.php/research-tools/">Research Tools</a></li>
+          <li><a href="https://www.dkut.ac.ke/library/index.php/google-scholar/">Google Scholar</a></li>
+          <li><a href="https://www.dkut.ac.ke/library/index.php/information-literacy/">Information Literacy</a></li>
+          <li><a href="https://www.dkut.ac.ke/library/index.php/rules-and-regulations/">Rules and Regulations</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h3>Open Hours</h3>
+        <p><strong>Weekdays:</strong><br />8:00am – 9:00pm</p>
+        <p><strong>Saturday:</strong><br />9:00am – 4:00pm</p>
+        <p><strong>Sundays &amp; Public Holidays:</strong><br />Closed</p>
+      </div>
+
+      <div class="footer-col">
+        <h3>Contacts</h3>
+        <p><strong>Location:</strong> Main Campus Library (2 Branches)</p>
+        <p><strong>Email:</strong> <a href="mailto:librarian@dkut.ac.ke">librarian@dkut.ac.ke</a></p>
+        <p><strong>Phone:</strong> +254-724-245-756</p>
+        <p><strong>Ext line:</strong> 1072</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      Copyright &copy; 2026 DeKUT Library
+    </div>
+  </footer>
+
+</div>
+
+<script>
+  // Banner Slider
+  let slideIdx = 0;
+  const slides = document.querySelectorAll('.banner-slide');
+
+  function moveSlide(step) {
+    slides[slideIdx].classList.remove('active');
+    slideIdx = (slideIdx + step + slides.length) % slides.length;
+    slides[slideIdx].classList.add('active');
+  }
+
+  setInterval(() => moveSlide(1), 6000);
+
+  // Header Search Tabs
+  let currentScope = 'ejournals';
+  const scopePlaceholders = {
+    ejournals: 'Search electronic journals and articles...',
+    opac: 'Search print books in Library Catalogue (OPAC)...',
+    repo: 'Search DeKUT theses and publications in Repository...'
+  };
+
+  function setScope(scope, btn) {
+    currentScope = scope;
+    document.querySelectorAll('.scope-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.getElementById('searchQuery').placeholder = scopePlaceholders[scope];
+  }
+
+  function runSearch(e) {
+    e.preventDefault();
+    const q = encodeURIComponent(document.getElementById('searchQuery').value.trim());
+    if (!q) return;
+
+    if (currentScope === 'ejournals') {
+      window.open('https://cse.google.com/cse?cx=008211478152120614474:ifjjbakw0ck&q=' + q, '_blank');
+    } else if (currentScope === 'opac') {
+      window.open('http://library.dkut.ac.ke/cgi-bin/koha/opac-search.pl?q=' + q, '_blank');
+    } else {
+      window.open('https://repository.dkut.ac.ke:8080/xmlui/discover?query=' + q, '_blank');
+    }
+  }
+</script>
+
+</body>
+</html>
