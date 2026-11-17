@@ -15,7 +15,7 @@
       --text-main: #222222;
       --text-muted: #555555;
       --border-color: #dcdcdc;
-      --bg-body: #f4f4f4;
+      --bg-body: #ffffff;
     }
 
     * {
@@ -24,7 +24,9 @@
       padding: 0;
     }
 
-    body {
+    html, body {
+      width: 100%;
+      overflow-x: hidden;
       font-family: 'Roboto', Arial, sans-serif;
       color: var(--text-main);
       background-color: var(--bg-body);
@@ -32,24 +34,21 @@
       line-height: 1.65;
     }
 
-    /* Classic Boxed University Container (Matches Vantage Theme) */
+    /* Full-Width Edge-to-Edge Wrapper */
     .page-wrapper {
-      max-width: 1140px;
-      margin: 0 auto;
+      width: 100%;
+      max-width: 100%;
+      margin: 0;
       background: #ffffff;
-      box-shadow: 0 0 12px rgba(0, 0, 0, 0.08);
     }
 
-    .container {
-      padding: 0 28px;
-    }
-
-    /* Top Institutional Info Bar */
+    /* Top Institutional Info Bar (Full Width) */
     .top-utility-bar {
+      width: 100%;
       background: var(--dekut-green-dark);
       color: #ffffff;
       font-size: 13px;
-      padding: 7px 28px;
+      padding: 8px max(28px, calc((100% - 1320px) / 2));
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
@@ -65,9 +64,10 @@
       text-decoration: underline;
     }
 
-    /* Site Header with Logo + Integrated Top Search */
+    /* Site Header with Logo + Integrated Top Search (Full Width) */
     .site-header {
-      padding: 18px 28px;
+      width: 100%;
+      padding: 18px max(28px, calc((100% - 1320px) / 2));
       background: #ffffff;
       display: flex;
       justify-content: space-between;
@@ -77,15 +77,15 @@
     }
 
     .site-logo img {
-      max-height: 82px;
+      max-height: 84px;
       width: auto;
       display: block;
     }
 
-    /* Header Search Box (Moved up from Footer) */
+    /* Header Search Box */
     .header-search {
       width: 100%;
-      max-width: 430px;
+      max-width: 460px;
     }
 
     .search-scope-tabs {
@@ -98,8 +98,8 @@
       background: #eeeeee;
       border: 1px solid #d4d4d4;
       border-bottom: none;
-      padding: 4px 10px;
-      font-size: 12px;
+      padding: 5px 12px;
+      font-size: 12.5px;
       font-weight: 500;
       color: #333333;
       cursor: pointer;
@@ -118,7 +118,7 @@
 
     .search-input-group input {
       flex: 1;
-      padding: 9px 12px;
+      padding: 10px 14px;
       border: 1px solid #bbbbbb;
       border-right: none;
       font-size: 14px;
@@ -134,7 +134,7 @@
       background: var(--dekut-green);
       color: #ffffff;
       border: 1px solid var(--dekut-green);
-      padding: 9px 18px;
+      padding: 10px 20px;
       font-size: 14px;
       font-weight: 500;
       cursor: pointer;
@@ -145,8 +145,9 @@
       background: var(--dekut-green-dark);
     }
 
-    /* Primary Navigation Bar with High-Visibility Dropdowns */
+    /* Primary Navigation Bar (Full Width) */
     .main-navigation {
+      width: 100%;
       background-color: var(--dekut-green);
       position: relative;
       z-index: 100;
@@ -169,7 +170,7 @@
       list-style: none;
       display: flex;
       flex-wrap: wrap;
-      padding: 0 14px;
+      padding: 0 max(14px, calc((100% - 1320px) / 2));
     }
 
     .nav-menu > li {
@@ -180,8 +181,8 @@
       display: block;
       color: #ffffff;
       text-decoration: none;
-      padding: 14px 15px;
-      font-size: 14px;
+      padding: 15px 17px;
+      font-size: 14.5px;
       font-weight: 500;
       transition: background 0.15s ease;
     }
@@ -196,13 +197,13 @@
       margin-left: 4px;
     }
 
-    /* Clear, High-Contrast Dropdown Menus */
+    /* High-Contrast Dropdown Menus */
     .sub-menu {
       display: none;
       position: absolute;
       top: 100%;
       left: 0;
-      min-width: 245px;
+      min-width: 255px;
       background-color: #ffffff;
       border: 1px solid #cccccc;
       border-top: 3px solid var(--dekut-gold);
@@ -241,7 +242,7 @@
       font-weight: 400;
     }
 
-    /* Real Banner Slider (1200x400 Aspect Ratio) */
+    /* Full-Width Banner Slider */
     .slider-container {
       position: relative;
       width: 100%;
@@ -252,6 +253,7 @@
     .banner-slide {
       display: none;
       position: relative;
+      width: 100%;
     }
 
     .banner-slide.active {
@@ -265,16 +267,17 @@
 
     .banner-slide img {
       width: 100%;
-      height: 380px;
+      height: 430px;
       object-fit: cover;
       display: block;
     }
 
-    /* Clean Caption Strip at Bottom of Banner */
+    /* Full-Width Caption Strip at Bottom of Banner */
     .banner-caption {
-      background: rgba(14, 70, 3, 0.92);
+      width: 100%;
+      background: rgba(14, 70, 3, 0.94);
       color: #ffffff;
-      padding: 14px 28px;
+      padding: 16px max(28px, calc((100% - 1320px) / 2));
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -284,20 +287,20 @@
 
     .banner-caption-text strong {
       display: block;
-      font-size: 17px;
+      font-size: 18px;
       letter-spacing: 0.01em;
     }
 
     .banner-caption-text span {
-      font-size: 13.5px;
+      font-size: 14px;
       color: #e6f2e4;
     }
 
     .banner-cta {
       background: #ffffff;
       color: var(--dekut-green);
-      padding: 7px 16px;
-      font-size: 13.5px;
+      padding: 8px 18px;
+      font-size: 14px;
       font-weight: 700;
       border-radius: 3px;
       white-space: nowrap;
@@ -310,9 +313,9 @@
       background: rgba(0, 0, 0, 0.5);
       color: #ffffff;
       border: none;
-      width: 36px;
-      height: 48px;
-      font-size: 20px;
+      width: 40px;
+      height: 52px;
+      font-size: 22px;
       cursor: pointer;
       z-index: 10;
     }
@@ -324,16 +327,17 @@
     .slider-prev { left: 0; }
     .slider-next { right: 0; }
 
-    /* Main Content + Sidebar (Authentic WordPress Two-Column Layout) */
+    /* Main Content + Sidebar (Full-Width Responsive Grid) */
     .site-main {
-      padding: 34px 28px 42px;
+      width: 100%;
+      padding: 38px max(28px, calc((100% - 1320px) / 2)) 48px;
       display: grid;
-      grid-template-columns: 2.1fr 1fr;
-      gap: 34px;
+      grid-template-columns: 2.2fr 1fr;
+      gap: 38px;
     }
 
     .entry-content h1 {
-      font-size: 23px;
+      font-size: 24px;
       color: var(--dekut-green);
       margin-bottom: 14px;
       padding-bottom: 8px;
@@ -341,14 +345,14 @@
     }
 
     .entry-content p {
-      margin-bottom: 15px;
+      margin-bottom: 16px;
       text-align: justify;
       color: #2b2b2b;
     }
 
-    /* Understated Collection Figures Strip */
+    /* Collection Figures Strip */
     .collection-summary {
-      margin-top: 24px;
+      margin-top: 26px;
       border: 1px solid var(--border-color);
       background: var(--dekut-green-tint);
       display: grid;
@@ -357,7 +361,7 @@
     }
 
     .collection-item {
-      padding: 14px 10px;
+      padding: 16px 10px;
       border-right: 1px solid var(--border-color);
     }
 
@@ -367,16 +371,16 @@
 
     .collection-item strong {
       display: block;
-      font-size: 20px;
+      font-size: 22px;
       color: var(--dekut-green);
     }
 
     .collection-item span {
-      font-size: 13px;
+      font-size: 13.5px;
       color: var(--text-muted);
     }
 
-    /* Classic Sidebar Widgets (No Bulky Cards) */
+    /* Sidebar Widgets */
     .sidebar-widget {
       border: 1px solid var(--border-color);
       margin-bottom: 24px;
@@ -386,8 +390,8 @@
     .widget-header {
       background: var(--dekut-green);
       color: #ffffff;
-      padding: 10px 15px;
-      font-size: 15px;
+      padding: 11px 16px;
+      font-size: 15.5px;
       font-weight: 700;
     }
 
@@ -407,7 +411,7 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 10px 15px;
+      padding: 11px 16px;
       color: var(--dekut-green);
       text-decoration: none;
       font-size: 14px;
@@ -420,7 +424,7 @@
     }
 
     .widget-body {
-      padding: 14px 15px;
+      padding: 15px 16px;
       font-size: 14px;
     }
 
@@ -428,18 +432,19 @@
       margin-bottom: 8px;
     }
 
-    /* Institutional Footer */
+    /* Institutional Footer (Full Width) */
     .site-footer {
+      width: 100%;
       background-color: var(--dekut-green);
       color: #ffffff;
-      padding: 32px 28px 18px;
+      padding: 36px max(28px, calc((100% - 1320px) / 2)) 20px;
     }
 
     .footer-widgets {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 28px;
-      padding-bottom: 24px;
+      gap: 32px;
+      padding-bottom: 26px;
       border-bottom: 1px solid rgba(255, 255, 255, 0.25);
     }
 
@@ -470,7 +475,7 @@
 
     .footer-bottom {
       text-align: center;
-      padding-top: 16px;
+      padding-top: 18px;
       font-size: 13px;
       color: #e2e8f0;
     }
@@ -509,7 +514,7 @@
       }
 
       .banner-slide img {
-        height: 240px;
+        height: 250px;
       }
 
       .collection-summary {
@@ -696,7 +701,7 @@
       </div>
     </article>
 
-    <!-- Right Column: Clean Quick Access Sidebar (Replaces Bulky Cards) -->
+    <!-- Right Column: Clean Quick Access Sidebar -->
     <aside aria-label="Quick Digital Portals">
       <div class="sidebar-widget">
         <div class="widget-header">Direct E-Resource Portals</div>
